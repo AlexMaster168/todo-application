@@ -1,0 +1,133 @@
+@import '../fonts';
+@import '../vars';
+@import '../mixins';
+
+
+.task{
+    &_indent{
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    &__info{
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+        justify-content: space-between;
+        @include media-breakpoint-down(sm){
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    }
+
+    &__name{
+        box-sizing: border-box;
+        display: block;
+        width: 88%;
+        border: 2px solid $mainBgColor;
+        border-radius: 4px;
+        &:focus{
+            outline: none;
+        }
+        &_indent{
+            padding: 8px 10px;
+        }
+        &::placeholder{
+            font-family: 'Montserrat', sans-serif;
+        }
+    }
+
+    &__submit{
+        width: 7%;
+        background-color: $mainBgColor;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        transition: .2s ease;
+        box-sizing: border-box;
+        font-weight: 900;
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            box-shadow: 1px 1px 10px black;
+        }
+        text-align: center;
+        @include media-breakpoint-down(sm){
+            height: 40px;
+            width: 50px;
+            margin-top: 20px;
+        }
+    }
+
+    &__choose{
+        margin-top: 20px;
+        width: 100%;
+        font-size: 18px;
+        margin-bottom: 10px;
+        @include text;
+    }
+
+    &__list{
+        display: block;
+        padding: 10px;
+        margin: 0 auto;
+        width: 50%;
+        border-radius: 4px;
+        border: 2px solid $mainBgColor;
+        cursor: pointer;
+        &:focus{
+            outline: none;
+        }
+        @include text;
+        @include media-breakpoint-down(sm){
+            width: 88%;
+        }
+    }
+
+    &__parametrs{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 40vw;
+        margin: 0 auto;
+        margin-top: 20px;
+        @include media-breakpoint-down(sm){
+            width: 88%;
+        }
+    }
+
+    &__data{
+        @include dateAndTimeStyles;
+        padding: 0 10px;
+        @include media-breakpoint-down(sm){
+            width: 88%;
+        }
+    }
+
+    &__dateSet{
+        @include DateTimeSet;
+    }
+
+    &__time{
+        @include dateAndTimeStyles;
+        padding: 0 10px;
+        @include media-breakpoint-down(sm){
+            width: 88%;
+            margin-top: 20px;
+        }
+        @include media-breakpoint-down(md){
+            margin-top: 20px;
+        }
+    }
+
+    &__timeSet{
+        @include DateTimeSet;
+    }
+
+
+
+}

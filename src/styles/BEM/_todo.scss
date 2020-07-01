@@ -1,0 +1,45 @@
+@import '../fonts';
+@import '../vars';
+@import '../mixins';
+
+.todo{
+    display: flex;
+    flex-direction: column;
+
+    &__title{
+        font-size: $titleSize;
+        color: $titleTextColor;
+        &_indent{
+            margin-bottom: 10px;
+            margin-top: 30px;
+        }
+        @include text;
+    }
+
+    &__subtitle{
+        color: $subtitleColor;
+        background-color: $mainBgColor;
+        line-height: $subtitleHeight;
+        box-shadow: 0 0 13px 1px black;
+        &_indent{
+            margin-bottom: 35px;
+            padding: 0 20px;
+        }
+        @include text;
+    }
+
+    &__createTask{
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 15px 3px black;
+        align-self: center;
+        width: 70vw;
+        background-color: #fff;
+        @include media-breakpoint-down(md){
+            width: 80vw;
+        }
+        @include media-breakpoint-down(sm){
+            width: 100vw;
+        }
+    }
+}

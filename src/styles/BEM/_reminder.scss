@@ -1,0 +1,88 @@
+.reminder{
+    display: flex;
+    flex-wrap: nowrap;
+    width: inherit;
+    box-sizing: border-box;
+    min-height: $reminderMinHeight;
+    
+    &__datetime{
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+    }
+        
+    &__date{
+        @include text;
+    }
+
+    &__time{
+        @include text;
+    }
+
+    &__notify{
+        display: flex;
+        flex-wrap: nowrap;
+        align-self: center;
+        width: 100%;
+        min-height: $notifyMinHeight;
+        border-left: 2px solid black;
+        position: relative;
+        &_indent{
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
+    }
+
+    &__btn{
+        width: $reminderBtnSize;
+        height: $reminderBtnSize;
+        border: 1px solid black;
+        outline: none;
+        align-self: flex-start;
+        border-radius: 50%;
+        box-sizing: border-box;
+        padding: 5px;
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__name{
+        align-self: flex-start;
+        @include text;
+        padding: 0 10px;
+    }
+
+    &__dateCreated{
+        position: absolute;
+        @include text;
+        top: 23px;
+        font-size: 14px;
+        @include media-breakpoint-down(xs){
+            font-size: 11px;
+        }
+        @include setAdaptiveDate{
+            font-size: 9px;
+        }
+    }
+
+    &__destroy{
+        align-self: center;
+        position: absolute;
+        right: 10px;
+        outline: none;
+        background-color: #3d0063;
+        border: none;
+        color: #fff;
+        border-radius: 3px;
+        font-size: 17px;
+        transition: .3s ease;
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            transform: scale(1.05, 1.05);
+            box-shadow: 0 0 9px 2px black;
+        }
+    }
+}
