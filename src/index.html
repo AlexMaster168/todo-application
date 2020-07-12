@@ -14,6 +14,7 @@
         <form class="todo__createTask task task_indent" action="index.html">
             <div class="task__info">
                 <input placeholder="Новая задача..." class="task__name task__name_indent" type="text" name="taskName">
+                <div class="invalid-name"></div>
                 <input title="Добавить" class="task__submit" type="submit" value="+">
             </div>
             <p class="task__choose">Выберите приоритет</p>
@@ -24,9 +25,10 @@
                 <option value="4">Не важно и не срочно</option>
             </select>
             <div class="task__parametrs">
-                <div class="task__data">
+                <div class="task__date">
                     <label style="line-height: 25px;" for="date">Дата выполнения</label>
                     <input class="task__dateSet" type="date" name="date" id="">
+                    <div class="invalid-date"></div>
                 </div>
                 <div class="task__time">
                     <label style="line-height: 25px;" for="time">Время выполнения</label>
@@ -35,46 +37,24 @@
             </div>
         </form>
         <div class="category category_indent">
-            <div class="category__item">
+            <div data-type="1" class="category__item">
                 <h3 class="category__title">
                     Важно и срочно
                 </h3>
-                <div class="reminder reminder_indent">
-                    <div class="reminder__datetime">
-                        <p class="reminder__date">
-                            01.07.2020
-                        </p>
-                        <p class="reminder__time">
-                            19:46
-                        </p>
-                    </div>
-                    <div class="reminder__notify reminder__notify_indent">
-                        <button class="reminder__btn"></button>
-                        <p class="reminder__name">
-                            Task name
-                        </p>
-                        <p class="reminder__dateCreated">
-                            <i>
-                                Дата создания: 19.07.2020
-                            </i>
-                        </p>
-                        <button title="Удалить" class="reminder__destroy">&#10006;</button>
-                    </div>
-                </div>
             </div>
-            <div class="category__item">
+            <div data-type="2" class="category__item">
                 <h3 class="category__title">
                     Важно, но не срочно
                 </h3>
             </div>
         </div>
         <div class="category">
-            <div class="category__item">
+            <div data-type="3" class="category__item">
                 <h3 class="category__title">
                     Не важно, но срочно
                 </h3>
             </div>
-            <div class="category__item">
+            <div data-type="4" class="category__item">
                 <h3 class="category__title">
                     Не важно и не срочно
                 </h3>
