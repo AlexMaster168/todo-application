@@ -24,3 +24,18 @@ btn-active{
     background-color: black;
 }
 
+.invalid-name{
+    @include text;
+    position: absolute;
+    color: red;
+    top: 45px;
+    font-size: 14px;
+}
+
+.invalid-date{
+    position: absolute;
+    @include text;
+    color: red;
+    font-size: 12px;
+    top: 76px;
+}
