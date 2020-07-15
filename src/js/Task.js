@@ -1,5 +1,8 @@
 import {ToDo} from './ToDo'
-import {getDefaultTaskElemts, getCreatedDate} from './utils'
+import {getDefaultTaskElemts, getCreatedDate, lastElem} from './utils'
+import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
+import {oneIndexCell, twoIndexCell, threeIndexCell, fourIndexCell} from './constants/constCellIndex'
+
 
 export class Task extends ToDo{
     constructor(categorySelector){
@@ -59,28 +62,37 @@ export class Task extends ToDo{
         `
     }
 
+    addItemsFromArray(array, index){
+        array.push(this.toHTML)
+        this.category[index].insertAdjacentHTML('beforeend', lastElem(array))
+    }
+
+    addItemToLocalStore(cell, arrayPriority){
+        localStorage.setItem(cell, JSON.stringify(arrayPriority))
+    }
+
     addTask(){
         let type = +this.select.value
 
             switch(type){
                 case 1:
-                    this.category[0].insertAdjacentHTML('beforeend', this.toHTML)
+                    this.addItemsFromArray(onePriority, oneIndexCell)
+                    this.addItemToLocalStore('ONE_CELL', onePriority)
                     break
                 case 2:
-                    this.category[1].insertAdjacentHTML('beforeend', this.toHTML)
-                    localStorage.setItem('todo1', this.toHTML)
+                    this.addItemsFromArray(twoPriority, twoIndexCell)
+                    this.addItemToLocalStore('TWO_CELL', twoPriority)
                     break
                 case 3:
-                    this.category[2].insertAdjacentHTML('beforeend', this.toHTML)
-                    localStorage.setItem('todo2', this.toHTML)
+                    this.addItemsFromArray(threePriority, threeIndexCell)
+                    this.addItemToLocalStore('THREE_CELL', threePriority)
                     break
                 case 4:
-                    this.category[3].insertAdjacentHTML('beforeend', this.toHTML)
-                    localStorage.setItem('todo3', this.toHTML)
+                    this.addItemsFromArray(fourPriority, fourIndexCell)
+                    this.addItemToLocalStore('FOUR_CELL', fourPriority)
                     break
                 default:
                     return ''
             }
-
     }
 }

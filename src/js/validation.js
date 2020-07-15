@@ -16,7 +16,7 @@ export class ValidatorName extends Validation{
     giveErr(){
         let message = []
 
-        if(this.taskName.value === '' || this.taskName.value === null || this.taskName.value.trim() === ''){
+        if(!this.taskName.value.trim()){
             message.push('Данное поле не может быть пустым!')
                 this.taskName.style.border = '2px solid red'
             }
