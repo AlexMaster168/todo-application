@@ -15,3 +15,7 @@ export function getCreatedDate(){
     let dateToday = `${dd}.${mm}.${date.getFullYear()}`
     return dateToday
 }
+
+export function lastElem(arr){
+    return arr[arr.length - 1]
+}
