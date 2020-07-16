@@ -19,3 +19,7 @@ export function getCreatedDate(){
 export function lastElem(arr){
     return arr[arr.length - 1]
 }
+
+export function getArrayItems(cell = ''){
+    return JSON.parse(localStorage.getItem(cell)) || []
+} 

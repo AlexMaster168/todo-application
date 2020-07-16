@@ -3,12 +3,12 @@ import {ValidatorName, ValidatorDate} from './validation'
 import {Task} from './Task'
 import {render} from './createCategory';
 import {LocalStorageItem} from './getItems'
+import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
 
 
 render() //Render category items
 
-const localStoreItem = new LocalStorageItem()
-
+const localStoreItem = new LocalStorageItem(onePriority, twoPriority, threePriority, fourPriority)
 const nameValidator = new ValidatorName('.invalid-name')
 const dateValidator = new ValidatorDate('.invalid-date')
 const taskCreator = new Task('.category__item')
@@ -30,9 +30,10 @@ document.addEventListener('submit', (event) => {
         dateValidator.date.value = ''
         dateValidator.time.value = ''
         taskCreator.select.value = 1
-        
     }
 })
+
+
 
 
 

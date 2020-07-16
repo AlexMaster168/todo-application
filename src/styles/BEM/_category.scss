@@ -8,7 +8,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 0 30px;
-    width: 85vw;
+    width: 100vw;
     margin: 0 auto;
     @include media-breakpoint-down(md){
         flex-direction: column;
@@ -29,7 +29,7 @@
 
     &__item{
         min-height: $itemMinHeight;
-        flex: 0 0 45%;
+        flex: 0 0 49%;
         @include media-breakpoint-down(md){
             min-height: 100px;
         }

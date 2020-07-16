@@ -4,15 +4,26 @@
     width: inherit;
     box-sizing: border-box;
     min-height: $reminderMinHeight;
+
+    &_indent{
+        padding: 6px 0;
+    }
     
     &__datetime{
         display: flex;
         flex-direction: column;
-        padding: 0 10px;
+        padding-left: 0;
+        padding-right: 10px;
     }
         
     &__date{
         @include text;
+        width: 70px;
+        font-size: 14px;
+        @include media-breakpoint-down(xs){
+            font-size: 11px;
+            width: 50px;
+        }
     }
 
     &__time{
@@ -51,6 +62,11 @@
         align-self: flex-start;
         @include text;
         padding: 0 10px;
+        font-size: 15px;
+        font-weight: 600;
+        @include media-breakpoint-down(xs){
+            font-size: 12px;
+        }
     }
 
     &__dateCreated{
@@ -62,7 +78,7 @@
             font-size: 11px;
         }
         @include setAdaptiveDate{
-            font-size: 9px;
+            font-size: 10px;
         }
     }
 
