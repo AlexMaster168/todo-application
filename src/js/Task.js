@@ -65,6 +65,7 @@ export class Task extends ToDo{
     addItemsFromArray(array, index){
         array.push(this.toHTML)
         this.category[index].insertAdjacentHTML('beforeend', lastElem(array))
+        console.log(array)
     }
 
     addItemToLocalStore(cell, arrayPriority){
