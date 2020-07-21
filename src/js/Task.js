@@ -1,5 +1,8 @@
 import {ToDo} from './ToDo'
-import {getDefaultTaskElemts, getCreatedDate} from './utils'
+import {getDefaultTaskElemts, getCreatedDate, lastElem, deleteArrayItem} from './utils'
+import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
+import {oneIndexCell, twoIndexCell, threeIndexCell, fourIndexCell} from './constants/constCellIndex'
+
 
 export class Task extends ToDo{
     constructor(categorySelector){
@@ -32,9 +35,15 @@ export class Task extends ToDo{
         return name
     }
 
+    getId(){
+        // let id = Symbol('id').toString()
+        let id = 'i' + new Date().getSeconds()*111
+        return id
+    }
+
     get toHTML(){
         return `
-        <div class="reminder reminder_indent">
+        <div id="${this.getId()}" class="reminder reminder_indent">
             <div class="reminder__datetime">
                 <p class="reminder__date">
                     ${this.getDateCreating()}
@@ -53,10 +62,19 @@ export class Task extends ToDo{
                         Дата создания: ${getCreatedDate()}
                     </i>
                 </p>
-                <button title="Удалить" class="reminder__destroy">&#10006;</button>
+                <button data-id="${this.getId()}" data-btn="true" title="Удалить" class="reminder__destroy">&#10006;</button>
             </div>
         </div>
         `
+    }
+
+    addItemsFromArray(array, index){
+        array.push(this.toHTML)
+        this.category[index].insertAdjacentHTML('beforeend', lastElem(array))
+    }
+
+    addItemToLocalStore(cell, arrayPriority){
+        localStorage.setItem(cell, JSON.stringify(arrayPriority))
     }
 
     addTask(){
@@ -64,23 +82,43 @@ export class Task extends ToDo{
 
             switch(type){
                 case 1:
-                    this.category[0].insertAdjacentHTML('beforeend', this.toHTML)
+                    this.addItemsFromArray(onePriority, oneIndexCell)
+                    this.addItemToLocalStore('ONE_CELL', onePriority)
                     break
                 case 2:
-                    this.category[1].insertAdjacentHTML('beforeend', this.toHTML)
-                    localStorage.setItem('todo1', this.toHTML)
+                    this.addItemsFromArray(twoPriority, twoIndexCell)
+                    this.addItemToLocalStore('TWO_CELL', twoPriority)
                     break
                 case 3:
-                    this.category[2].insertAdjacentHTML('beforeend', this.toHTML)
-                    localStorage.setItem('todo2', this.toHTML)
+                    this.addItemsFromArray(threePriority, threeIndexCell)
+                    this.addItemToLocalStore('THREE_CELL', threePriority)
                     break
                 case 4:
-                    this.category[3].insertAdjacentHTML('beforeend', this.toHTML)
-                    localStorage.setItem('todo3', this.toHTML)
+                    this.addItemsFromArray(fourPriority, fourIndexCell)
+                    this.addItemToLocalStore('FOUR_CELL', fourPriority)
                     break
                 default:
                     return ''
             }
+    }
 
+    deleteTask(){
+        document.addEventListener('click', (event) =>{
+            if(event.target.hasAttribute('data-btn')){
+                let item = document.getElementById(`${event.target.dataset.id}`)
+                item.parentNode.removeChild(item)
+                deleteArrayItem(onePriority, 'ONE_CELL')
+                deleteArrayItem(twoPriority, 'TWO_CELL')
+                deleteArrayItem(threePriority, 'THREE_CELL')
+                deleteArrayItem(fourPriority, 'FOUR_CELL')
+                // onePriority.map((item, i) => {
+                //     if(item.includes(`${event.target.dataset.id}`)){
+                //         onePriority.splice(i, 1)
+                //         localStorage.setItem('ONE_CELL', JSON.stringify(onePriority))
+                //     }
+                // })
+            }
+        })
     }
 }
+
