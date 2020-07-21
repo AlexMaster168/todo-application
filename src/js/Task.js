@@ -1,5 +1,5 @@
 import {ToDo} from './ToDo'
-import {getDefaultTaskElemts, getCreatedDate, lastElem} from './utils'
+import {getDefaultTaskElemts, getCreatedDate, lastElem, deleteArrayItem} from './utils'
 import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
 import {oneIndexCell, twoIndexCell, threeIndexCell, fourIndexCell} from './constants/constCellIndex'
 
@@ -35,9 +35,15 @@ export class Task extends ToDo{
         return name
     }
 
+    getId(){
+        // let id = Symbol('id').toString()
+        let id = 'i' + new Date().getSeconds()*111
+        return id
+    }
+
     get toHTML(){
         return `
-        <div class="reminder reminder_indent">
+        <div id="${this.getId()}" class="reminder reminder_indent">
             <div class="reminder__datetime">
                 <p class="reminder__date">
                     ${this.getDateCreating()}
@@ -56,7 +62,7 @@ export class Task extends ToDo{
                         Дата создания: ${getCreatedDate()}
                     </i>
                 </p>
-                <button title="Удалить" class="reminder__destroy">&#10006;</button>
+                <button data-id="${this.getId()}" data-btn="true" title="Удалить" class="reminder__destroy">&#10006;</button>
             </div>
         </div>
         `
@@ -65,7 +71,6 @@ export class Task extends ToDo{
     addItemsFromArray(array, index){
         array.push(this.toHTML)
         this.category[index].insertAdjacentHTML('beforeend', lastElem(array))
-        console.log(array)
     }
 
     addItemToLocalStore(cell, arrayPriority){
@@ -95,5 +100,21 @@ export class Task extends ToDo{
                 default:
                     return ''
             }
+
+    }
+
+    deleteTask(){
+        document.addEventListener('click', (event) =>{
+            if(event.target.hasAttribute('data-btn')){
+                let item = document.getElementById(`${event.target.dataset.id}`)
+                item.parentNode.removeChild(item)
+                deleteArrayItem(onePriority, 'ONE_CELL')
+                deleteArrayItem(twoPriority, 'TWO_CELL')
+                deleteArrayItem(threePriority, 'THREE_CELL')
+                deleteArrayItem(fourPriority, 'FOUR_CELL')
+        })
+
+
     }
 }
+

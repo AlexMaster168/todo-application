@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nameValidator.chekingInput()
     dateValidator.chekingInput()
     localStoreItem.pasteItemsFromLocalStore()
+    taskCreator.deleteTask()
 })
 
 
