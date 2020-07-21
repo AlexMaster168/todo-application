@@ -36,7 +36,6 @@ export class Task extends ToDo{
     }
 
     getId(){
-        // let id = Symbol('id').toString()
         let id = 'i' + new Date().getSeconds()*111
         return id
     }
@@ -112,9 +111,8 @@ export class Task extends ToDo{
                 deleteArrayItem(twoPriority, 'TWO_CELL')
                 deleteArrayItem(threePriority, 'THREE_CELL')
                 deleteArrayItem(fourPriority, 'FOUR_CELL')
+            }
         })
-
-
     }
 }
 

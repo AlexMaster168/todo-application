@@ -34,5 +34,5 @@ export function deleteArrayItem(arr, cell = ''){
     })
 }
 
-} 
+
 
