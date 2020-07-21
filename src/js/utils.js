@@ -22,6 +22,7 @@ export function lastElem(arr){
 
 export function getArrayItems(cell = ''){
     return JSON.parse(localStorage.getItem(cell)) || []
+
 } 
 
 export function deleteArrayItem(arr, cell = ''){
@@ -32,3 +33,6 @@ export function deleteArrayItem(arr, cell = ''){
         }
     })
 }
+
+} 
+

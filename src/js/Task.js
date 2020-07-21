@@ -100,6 +100,7 @@ export class Task extends ToDo{
                 default:
                     return ''
             }
+
     }
 
     deleteTask(){
@@ -111,14 +112,9 @@ export class Task extends ToDo{
                 deleteArrayItem(twoPriority, 'TWO_CELL')
                 deleteArrayItem(threePriority, 'THREE_CELL')
                 deleteArrayItem(fourPriority, 'FOUR_CELL')
-                // onePriority.map((item, i) => {
-                //     if(item.includes(`${event.target.dataset.id}`)){
-                //         onePriority.splice(i, 1)
-                //         localStorage.setItem('ONE_CELL', JSON.stringify(onePriority))
-                //     }
-                // })
-            }
         })
+
+
     }
 }
 
