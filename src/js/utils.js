@@ -23,6 +23,7 @@ export function lastElem(arr){
 
 export function getArrayItems(cell = ''){
     return JSON.parse(localStorage.getItem(cell)) || []
+
 } 
 
 export function deleteArrayItem(arr, cell = ''){
@@ -47,3 +48,4 @@ export function chekingArrayLength(arrPrioritys, arrItemsTexts, itemsTextsIndex)
         hiddenItemText(arrItemsTexts, itemsTextsIndex)
     } else showItemText(arrItemsTexts, itemsTextsIndex)
 }
+

@@ -104,6 +104,7 @@ export class Task extends ToDo{
                 default:
                     return ''
             }
+
     }
 
     deleteTask(){
