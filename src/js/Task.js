@@ -1,5 +1,5 @@
 import {ToDo} from './ToDo'
-import {getDefaultTaskElemts, getCreatedDate, lastElem, deleteArrayItem} from './utils'
+import {getDefaultTaskElemts, completeTaskItem, getCreatedDate, lastElem, deleteArrayItem, hiddenItemText, showItemText, chekingArrayLength} from './utils'
 import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
 import {oneIndexCell, twoIndexCell, threeIndexCell, fourIndexCell} from './constants/constCellIndex'
 
@@ -8,6 +8,7 @@ export class Task extends ToDo{
     constructor(categorySelector){
         super(...getDefaultTaskElemts())
         this.category = document.querySelectorAll(categorySelector)
+        this.itemsTexts = document.querySelectorAll('.category__complitly') || []
     }
 
     getDateCreating(){
@@ -52,7 +53,7 @@ export class Task extends ToDo{
                 </p>
             </div>
             <div class="reminder__notify reminder__notify_indent">
-                <button class="reminder__btn"></button>
+                <button data-btn-complete="true" id="${this.getId()}" class="reminder__btn"></button>
                 <p class="reminder__name">
                     ${this.getNameCreating()}
                 </p>
@@ -61,7 +62,7 @@ export class Task extends ToDo{
                         Дата создания: ${getCreatedDate()}
                     </i>
                 </p>
-                <button data-id="${this.getId()}" data-btn="true" title="Удалить" class="reminder__destroy">&#10006;</button>
+                <button data-id="${this.getId()}" data-btn-destroy="true" title="Удалить" class="reminder__destroy">&#10006;</button>
             </div>
         </div>
         `
@@ -81,18 +82,22 @@ export class Task extends ToDo{
 
             switch(type){
                 case 1:
+                    hiddenItemText(this.itemsTexts, 0)
                     this.addItemsFromArray(onePriority, oneIndexCell)
                     this.addItemToLocalStore('ONE_CELL', onePriority)
                     break
                 case 2:
+                    hiddenItemText(this.itemsTexts, 1)
                     this.addItemsFromArray(twoPriority, twoIndexCell)
                     this.addItemToLocalStore('TWO_CELL', twoPriority)
                     break
                 case 3:
+                    hiddenItemText(this.itemsTexts, 2)
                     this.addItemsFromArray(threePriority, threeIndexCell)
                     this.addItemToLocalStore('THREE_CELL', threePriority)
                     break
                 case 4:
+                    hiddenItemText(this.itemsTexts, 3)
                     this.addItemsFromArray(fourPriority, fourIndexCell)
                     this.addItemToLocalStore('FOUR_CELL', fourPriority)
                     break
@@ -104,7 +109,7 @@ export class Task extends ToDo{
 
     deleteTask(){
         document.addEventListener('click', (event) =>{
-            if(event.target.hasAttribute('data-btn')){
+            if(event.target.hasAttribute('data-btn-destroy')){
                 let item = document.getElementById(`${event.target.dataset.id}`)
                 item.parentNode.removeChild(item)
                 deleteArrayItem(onePriority, 'ONE_CELL')
@@ -113,6 +118,28 @@ export class Task extends ToDo{
                 deleteArrayItem(fourPriority, 'FOUR_CELL')
             }
         })
+    }
+
+    completeTask(){
+        document.addEventListener('click', (event) => {
+            if(event.target.hasAttribute('data-btn-complete')){
+                const button = event.target
+                button.classList.toggle('reminder__btn-complete')
+                let item = document.getElementById(`${event.target.id}`)
+                item.classList.toggle('reminder-complete')
+                const taskName = button.nextElementSibling
+                taskName.classList.toggle('reminder__name-complete')
+            }
+        })
+    }
+
+    textItemComplitly(){
+        const itemsTexts = document.querySelectorAll('.category__complitly') || []
+    
+        chekingArrayLength(onePriority, itemsTexts, 0)
+        chekingArrayLength(twoPriority, itemsTexts, 1)
+        chekingArrayLength(threePriority, itemsTexts, 2)
+        chekingArrayLength(fourPriority, itemsTexts, 3)
     }
 }
 

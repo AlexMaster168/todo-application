@@ -1,3 +1,4 @@
+
 export function getDefaultTaskElemts(){
     let defaultElem = ['.task', '.task__name', '.task__list', '.task__dateSet', '.task__timeSet']
     return defaultElem
@@ -34,5 +35,17 @@ export function deleteArrayItem(arr, cell = ''){
     })
 }
 
+export function hiddenItemText(array, index){
+    return array[index].style.display = 'none'
+}
 
+export function showItemText(array, index){
+    return array[index].style.display = 'block'
+}
+
+export function chekingArrayLength(arrPrioritys, arrItemsTexts, itemsTextsIndex){
+    if(arrPrioritys.length > 0){
+        hiddenItemText(arrItemsTexts, itemsTextsIndex)
+    } else showItemText(arrItemsTexts, itemsTextsIndex)
+}
 

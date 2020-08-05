@@ -112,6 +112,9 @@
 
     &__dateSet{
         @include DateTimeSet;
+        &:hover{
+            cursor: pointer;
+        }
     }
 
     &__time{
@@ -128,5 +131,8 @@
 
     &__timeSet{
         @include DateTimeSet;
+        &:hover{
+            cursor: pointer;
+        }
     }
 }

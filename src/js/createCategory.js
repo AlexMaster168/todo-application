@@ -13,6 +13,9 @@ const createHTML = category => {
                     <h3 class="category__title">
                         ${category.text}
                     </h3>
+                    <h3 class="category__complitly">
+                        Поздравляю! Все задачи выполнены
+                    </h3>
                 </div>`
     return html
 }
