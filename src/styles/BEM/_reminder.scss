@@ -4,6 +4,10 @@
     width: inherit;
     box-sizing: border-box;
     min-height: $reminderMinHeight;
+    transition: .2s ease;
+    &:hover{
+        background-color: #d3d3d3;
+    }
 
     &_indent{
         padding: 6px 0;
@@ -56,6 +60,10 @@
         &:focus{
             outline: none;
         }
+        &:hover{
+            background-image: url('../img/chek.svg');
+            background-size: cover;
+        }
     }
 
     &__name{
@@ -101,3 +109,17 @@
         }
     }
 }
+
+.reminder.reminder-complete{
+    opacity: 0.6;
+}
+
+.reminder__name.reminder__name-complete{
+    text-decoration: line-through;
+}
+
+.reminder__btn.reminder__btn-complete{
+    background-image: url('../img/chek.svg');
+    background-size: cover;
+}
+

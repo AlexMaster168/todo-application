@@ -1,0 +1,20 @@
+.preloader{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #f1f1f1;
+    z-index: 5;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__animated{
+        background-image: url('../img/preloader.svg');
+        width: 200px;
+        height: 200px;
+        background-color: #f1f1f1;
+    }
+}
