@@ -5,6 +5,7 @@ import {render} from './createCategory';
 import {LocalStorageItem} from './getItems'
 import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
 import { Preloader } from './preloader';
+import { Modal } from './modal/modal.editTask';
 
 render() //Render category items
 
@@ -13,6 +14,8 @@ const localStoreItem = new LocalStorageItem(onePriority, twoPriority, threePrior
 const nameValidator = new ValidatorName('.invalid-name')
 const dateValidator = new ValidatorDate('.invalid-date')
 const taskCreator = new Task('.category__item')
+const modalWindow = new Modal('.window__name', '.window__dateSet', '.window__timeSet')
+
 taskCreator.textItemComplitly()
 
 setInterval(taskCreator.textItemComplitly, 500)
@@ -23,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStoreItem.pasteItemsFromLocalStore()
     taskCreator.deleteTask()
     taskCreator.completeTask()
+    taskCreator.editTask()
 })
 
 document.addEventListener('submit', (event) => {
@@ -37,16 +41,3 @@ document.addEventListener('submit', (event) => {
         taskCreator.select.value = 1
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -10,6 +10,7 @@
 @import './BEM/category';
 @import './BEM/reminder';
 @import './BEM/preloader';
+@import './BEM/window';
 
 p{
     margin: 0;
@@ -19,7 +20,6 @@ p{
 body{
     background-color: $bodyBg;
 }
-
 
 btn-active{
     background-color: black;
