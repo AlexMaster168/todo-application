@@ -142,7 +142,5 @@ export class Task extends ToDo{
         chekingArrayLength(threePriority, itemsTexts, 2)
         chekingArrayLength(fourPriority, itemsTexts, 3)
     }
-
-
 }
 

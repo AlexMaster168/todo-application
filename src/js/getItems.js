@@ -32,7 +32,6 @@ export class LocalStorageItem extends Task{
             case 4:
                 this.addItemsFromLocalStore(this.FOUR_CELL, fourIndexCell)
                 break
-            
         }
     }
     
