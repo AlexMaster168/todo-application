@@ -34,6 +34,11 @@ export function deleteArrayItem(arr, cell = ''){
     })
 }
 
+export function getIndex(arr){
+    const index = arr.findIndex(item => item.includes(`${event.target.dataset.id}`))
+    return index
+}
+
 export function hiddenItemText(array, index){
     return array[index].style.display = 'none'
 }
@@ -46,4 +51,13 @@ export function chekingArrayLength(arrPrioritys, arrItemsTexts, itemsTextsIndex)
     if(arrPrioritys.length > 0){
         hiddenItemText(arrItemsTexts, itemsTextsIndex)
     } else showItemText(arrItemsTexts, itemsTextsIndex)
+}
+
+export function changeTask(index, arrNumber, item, arrPriority, cell = ''){
+    if(index[arrNumber] !== -1){
+        const arrIndexChanger = index[arrNumber]
+        const reminder = item.outerHTML
+        arrPriority.splice(arrIndexChanger, 1, reminder)
+        localStorage.setItem(cell, JSON.stringify(arrPriority))
+    } 
 }

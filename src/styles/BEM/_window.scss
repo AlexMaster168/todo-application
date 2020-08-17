@@ -1,0 +1,95 @@
+@import '../fonts';
+@import '../vars';
+@import '../mixins';
+
+.window{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(172, 172, 172, 0.8);
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    &__body{
+        width: 48%;
+        background-color: #fff;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        transition: .2s ease;
+        padding-bottom: 25px;
+        @include media-breakpoint-down(md){
+            width: 70%;
+        }
+        @include media-breakpoint-down(xs){
+            width: 90%;
+        }
+    }
+
+    &__dateSet{
+        @include DateTimeSet;
+    }
+
+    &__animation{
+        animation: open .2s ease;
+    }
+
+    &__close{
+        width: 40px;
+        align-self: flex-end;
+        background: transparent;
+        border: none;
+        margin-top: 5px;
+        font-size: 20px;
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__name{
+        width: 80%;
+        align-self: center;
+        border: 2px solid $mainBgColor;
+        border-radius: 5px;
+        font-family: 'Montserrat', sans-serif;
+        height: 40px;
+        margin-top: 15px;
+    }
+
+    &__done{
+        background-color: $titleTextColor;
+        border: none;
+        border-radius: 4px;
+        transition: .2s ease;
+        cursor: pointer;
+        justify-self: flex-end;
+        align-self: center;
+        width: 80%;
+        opacity: 0.6;
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            background-color: $mainBgColor;
+        }
+        font-family: 'Montserrat', sans-serif;
+        color: #fff;
+        margin-top: 15px;
+        height: 35px;
+    }
+}
+
+@keyframes open{
+    from{
+        transform: scale(0,0);
+    }
+    50%{
+        transform: scale(1.1,1.1);
+    }
+    to{
+        transform: scale(1,1);
+    }
+}

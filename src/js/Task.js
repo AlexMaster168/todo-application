@@ -62,6 +62,7 @@ export class Task extends ToDo{
                         Дата создания: ${getCreatedDate()}
                     </i>
                 </p>
+                <button data-id="${this.getId()}" data-btn-edit="true" title="Изменить" class="reminder__edit"></button>
                 <button data-id="${this.getId()}" data-btn-destroy="true" title="Удалить" class="reminder__destroy">&#10006;</button>
             </div>
         </div>
@@ -140,5 +141,7 @@ export class Task extends ToDo{
         chekingArrayLength(threePriority, itemsTexts, 2)
         chekingArrayLength(fourPriority, itemsTexts, 3)
     }
+
+
 }
 

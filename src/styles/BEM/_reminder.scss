@@ -1,3 +1,5 @@
+@import '../vars';
+
 .reminder{
     display: flex;
     flex-wrap: nowrap;
@@ -106,6 +108,26 @@
         }
         &:hover{
             box-shadow: 0 0 9px 2px black;
+        }
+    }
+
+    &__edit{
+        background-image: url('../img/iconedit.svg');
+        background-size: cover;
+        box-sizing: border-box;
+        right: 50px;
+        align-self: center;
+        position: absolute;
+        border: none;
+        background-color: transparent;
+        width: 30px;
+        height: 29px;
+        transition: .2s ease;
+        &:focus{
+            outline: none;
+        }
+        &:hover{
+            transform: scale(1.05, 1.05);
         }
     }
 }
