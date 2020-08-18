@@ -29,7 +29,7 @@
         }
     }
 
-    &__dateSet{
+    &__dateSet, &__timeSet{
         @include DateTimeSet;
     }
 

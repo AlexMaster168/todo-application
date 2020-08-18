@@ -32,6 +32,14 @@ export class Modal{
                 }
             })
         })
+
+        if(this.rename.value.trim() && this.redate.value !== ''){
+            this.done.style.opacity = 1
+            this.done.disabled = false
+        }else {
+            this.done.style.opacity = 0.6
+            this.done.disabled = true
+        }
     }
 
     open(){
