@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     localStoreItem.pasteItemsFromLocalStore()
     taskCreator.deleteTask()
     taskCreator.completeTask()
-    taskCreator.editTask()
 })
 
 document.addEventListener('submit', (event) => {

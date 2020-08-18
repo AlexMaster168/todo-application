@@ -130,6 +130,16 @@
             transform: scale(1.05, 1.05);
         }
     }
+
+    &__countdown{
+        display: none;
+        position: absolute;
+        right: 100px;
+        top: 6px;
+        font-size: 20px;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+    }
 }
 
 .reminder.reminder-complete{

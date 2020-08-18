@@ -1,8 +1,7 @@
 import {ToDo} from './ToDo'
-import {getDefaultTaskElemts, completeTaskItem, getCreatedDate, lastElem, deleteArrayItem, hiddenItemText, showItemText, chekingArrayLength} from './utils'
+import {getDefaultTaskElemts, getCreatedDate, lastElem, deleteArrayItem, hiddenItemText, chekingArrayLength} from './utils'
 import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
 import {oneIndexCell, twoIndexCell, threeIndexCell, fourIndexCell} from './constants/constCellIndex'
-
 
 export class Task extends ToDo{
     constructor(categorySelector){
@@ -62,6 +61,9 @@ export class Task extends ToDo{
                         Дата создания: ${getCreatedDate()}
                     </i>
                 </p>
+                <p data-countdown-id="${this.getId()}" class="reminder__countdown">
+                    00:${this.counter}
+                </p>
                 <button data-id="${this.getId()}" data-btn-edit="true" title="Изменить" class="reminder__edit"></button>
                 <button data-id="${this.getId()}" data-btn-destroy="true" title="Удалить" class="reminder__destroy">&#10006;</button>
             </div>
@@ -110,12 +112,12 @@ export class Task extends ToDo{
     deleteTask(){
         document.addEventListener('click', (event) =>{
             if(event.target.hasAttribute('data-btn-destroy')){
-                let item = document.getElementById(`${event.target.dataset.id}`)
-                item.parentNode.removeChild(item)
-                deleteArrayItem(onePriority, 'ONE_CELL')
-                deleteArrayItem(twoPriority, 'TWO_CELL')
-                deleteArrayItem(threePriority, 'THREE_CELL')
-                deleteArrayItem(fourPriority, 'FOUR_CELL')
+                    let item = document.getElementById(`${event.target.dataset.id}`)
+                    item.parentNode.removeChild(item)
+                    deleteArrayItem(onePriority, 'ONE_CELL')
+                    deleteArrayItem(twoPriority, 'TWO_CELL')
+                    deleteArrayItem(threePriority, 'THREE_CELL')
+                    deleteArrayItem(fourPriority, 'FOUR_CELL')
             }
         })
     }
@@ -123,12 +125,23 @@ export class Task extends ToDo{
     completeTask(){
         document.addEventListener('click', (event) => {
             if(event.target.hasAttribute('data-btn-complete')){
+                let counter = 10
                 const button = event.target
-                button.classList.toggle('reminder__btn-complete')
+                button.classList.add('reminder__btn-complete')
                 let item = document.getElementById(`${event.target.id}`)
-                item.classList.toggle('reminder-complete')
+                item.classList.add('reminder-complete')
+                const countdown = item.querySelector('.reminder__countdown')
+                countdown.style.display = 'block'
+                countdown.innerHTML = '00:10'
+                setInterval(() => {
+                    countdown.innerHTML = `00:${counter--}`
+                }, 1000)
+                const deleteBtn = item.querySelector('.reminder__destroy')
+                setTimeout(() => {
+                    deleteBtn.click()
+                }, 11000)
                 const taskName = button.nextElementSibling
-                taskName.classList.toggle('reminder__name-complete')
+                taskName.classList.add('reminder__name-complete')
             }
         })
     }
