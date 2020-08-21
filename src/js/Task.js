@@ -1,24 +1,31 @@
 import {ToDo} from './ToDo'
-import {getDefaultTaskElemts, getCreatedDate, lastElem, deleteArrayItem, hiddenItemText, chekingArrayLength} from './utils'
+import {
+    getDefaultTaskElemts,
+    getCreatedDate,
+    lastElem,
+    deleteArrayItem,
+    hiddenItemText,
+    chekingArrayLength
+} from './utils'
 import {onePriority, twoPriority, threePriority, fourPriority} from './constants/constPriority'
 import {oneIndexCell, twoIndexCell, threeIndexCell, fourIndexCell} from './constants/constCellIndex'
 
-export class Task extends ToDo{
-    constructor(categorySelector){
+export class Task extends ToDo {
+    constructor(categorySelector) {
         super(...getDefaultTaskElemts())
         this.category = document.querySelectorAll(categorySelector)
         this.itemsTexts = document.querySelectorAll('.category__complitly') || []
     }
 
-    getDateCreating(){
+    getDateCreating() {
         let date = this.date.value
         let innerDate = date.split('-').reverse().join('.')
         return innerDate
     }
 
-    getTimeCreating(){
+    getTimeCreating() {
         let time
-        if(this.time.value !== '' || this.time.value !== null){
+        if (this.time.value !== '' || this.time.value !== null) {
             time = this.time.value
             return time
         } else {
@@ -26,21 +33,21 @@ export class Task extends ToDo{
         }
     }
 
-    getNameCreating(){
+    getNameCreating() {
         let name
-        if(this.taskName.value){
+        if (this.taskName.value) {
             name = this.taskName.value
             return name
         }
         return name
     }
 
-    getId(){
-        let id = 'i' + new Date().getSeconds()*111
+    getId() {
+        let id = 'i' + new Date().getSeconds() * 111
         return id
     }
 
-    get toHTML(){
+    get toHTML() {
         return `
         <div id="${this.getId()}" class="reminder reminder_indent">
             <div class="reminder__datetime">
@@ -65,67 +72,71 @@ export class Task extends ToDo{
                     00:${this.counter}
                 </p>
                 <button data-id="${this.getId()}" data-btn-edit="true" title="Изменить" class="reminder__edit"></button>
-                <button data-id="${this.getId()}" data-btn-destroy="true" title="Удалить" class="reminder__destroy">&#10006;</button>
+                <button data-id="${this.getId()}" data-btn-destroy="true" title="Удалить" class="reminder__destroy">&#10006;</button>              
+                <button class="reminder__arrow-up fa fa-angle-up"></button>
+                <button class="reminder__arrow-down fa fa-angle-down"></button>
             </div>
         </div>
+      
         `
     }
 
-    addItemsFromArray(array, index){
+    addItemsFromArray(array, index) {
         array.push(this.toHTML)
         this.category[index].insertAdjacentHTML('beforeend', lastElem(array))
     }
 
-    addItemToLocalStore(cell, arrayPriority){
+    addItemToLocalStore(cell, arrayPriority) {
         localStorage.setItem(cell, JSON.stringify(arrayPriority))
     }
 
-    addTask(){
+    addTask() {
         let type = +this.select.value
 
-            switch(type){
-                case 1:
-                    hiddenItemText(this.itemsTexts, 0)
-                    this.addItemsFromArray(onePriority, oneIndexCell)
-                    this.addItemToLocalStore('ONE_CELL', onePriority)
-                    break
-                case 2:
-                    hiddenItemText(this.itemsTexts, 1)
-                    this.addItemsFromArray(twoPriority, twoIndexCell)
-                    this.addItemToLocalStore('TWO_CELL', twoPriority)
-                    break
-                case 3:
-                    hiddenItemText(this.itemsTexts, 2)
-                    this.addItemsFromArray(threePriority, threeIndexCell)
-                    this.addItemToLocalStore('THREE_CELL', threePriority)
-                    break
-                case 4:
-                    hiddenItemText(this.itemsTexts, 3)
-                    this.addItemsFromArray(fourPriority, fourIndexCell)
-                    this.addItemToLocalStore('FOUR_CELL', fourPriority)
-                    break
-                default:
-                    return ''
-            }
+        switch (type) {
+            case 1:
+                hiddenItemText(this.itemsTexts, 0)
+                this.addItemsFromArray(onePriority, oneIndexCell)
+                this.addItemToLocalStore('ONE_CELL', onePriority)
+                break
+            case 2:
+                hiddenItemText(this.itemsTexts, 1)
+                this.addItemsFromArray(twoPriority, twoIndexCell)
+                this.addItemToLocalStore('TWO_CELL', twoPriority)
+                break
+            case 3:
+                hiddenItemText(this.itemsTexts, 2)
+                this.addItemsFromArray(threePriority, threeIndexCell)
+                this.addItemToLocalStore('THREE_CELL', threePriority)
+                break
+            case 4:
+                hiddenItemText(this.itemsTexts, 3)
+                this.addItemsFromArray(fourPriority, fourIndexCell)
+                this.addItemToLocalStore('FOUR_CELL', fourPriority)
+                break
+            default:
+                return ''
+        }
 
     }
 
-    deleteTask(){
-        document.addEventListener('click', (event) =>{
-            if(event.target.hasAttribute('data-btn-destroy')){
-                    let item = document.getElementById(`${event.target.dataset.id}`)
-                    item.parentNode.removeChild(item)
-                    deleteArrayItem(onePriority, 'ONE_CELL')
-                    deleteArrayItem(twoPriority, 'TWO_CELL')
-                    deleteArrayItem(threePriority, 'THREE_CELL')
-                    deleteArrayItem(fourPriority, 'FOUR_CELL')
+    deleteTask() {
+        document.addEventListener('click', (event) => {
+            if (event.target.hasAttribute('data-btn-destroy')) {
+                let item = document.getElementById(`${event.target.dataset.id}`)
+                item.parentNode.removeChild(item)
+                deleteArrayItem(onePriority, 'ONE_CELL')
+                deleteArrayItem(twoPriority, 'TWO_CELL')
+                deleteArrayItem(threePriority, 'THREE_CELL')
+                deleteArrayItem(fourPriority, 'FOUR_CELL')
+                alert('Задача успешна была удалена')
             }
         })
     }
 
-    completeTask(){
+    completeTask() {
         document.addEventListener('click', (event) => {
-            if(event.target.hasAttribute('data-btn-complete')){
+            if (event.target.hasAttribute('data-btn-complete')) {
                 let counter = 10
                 const button = event.target
                 button.classList.add('reminder__btn-complete')
@@ -135,7 +146,8 @@ export class Task extends ToDo{
                 countdown.style.display = 'block'
                 countdown.innerHTML = '00:10'
                 setInterval(() => {
-                    countdown.innerHTML = `00:${counter--}`
+                    if (counter === 10) countdown.innerHTML = `00:${counter--}`
+                    else countdown.innerHTML = `00:0${counter--}`
                 }, 1000)
                 const deleteBtn = item.querySelector('.reminder__destroy')
                 setTimeout(() => {
@@ -147,9 +159,9 @@ export class Task extends ToDo{
         })
     }
 
-    textItemComplitly(){
+    textItemComplitly() {
         const itemsTexts = document.querySelectorAll('.category__complitly') || []
-    
+
         chekingArrayLength(onePriority, itemsTexts, 0)
         chekingArrayLength(twoPriority, itemsTexts, 1)
         chekingArrayLength(threePriority, itemsTexts, 2)

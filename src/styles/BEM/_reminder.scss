@@ -1,161 +1,183 @@
 @import '../vars';
 
-.reminder{
+.reminder {
+  display: flex;
+  flex-wrap: nowrap;
+  width: inherit;
+  box-sizing: border-box;
+  min-height: $reminderMinHeight;
+  transition: .2s ease;
+  border: 2px solid silver;
+
+  &:hover {
+    background-color: #d3d3d3;
+  }
+
+  &_indent {
+    padding: 6px 0;
+  }
+
+  &__datetime {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 10px;
+  }
+
+  &__date {
+    @include text;
+    width: 70px;
+    font-size: 14px;
+    @include media-breakpoint-down(xs) {
+      font-size: 11px;
+      width: 50px;
+    }
+  }
+
+  &__arrow-up {
+    position: absolute;
+    left: 356px;
+    padding: 10px;
+  }
+
+  &__arrow-down {
+    position: absolute;
+    left: 406px;
+    padding: 10px;
+  }
+
+  &__time {
+    @include text;
+    @include media-breakpoint-down(xs) {
+      font-size: 11px;
+      width: 50px;
+    }
+  }
+
+  &__notify {
     display: flex;
     flex-wrap: nowrap;
-    width: inherit;
+    align-self: center;
+    width: 100%;
+    min-height: $notifyMinHeight;
+    border-left: 2px solid black;
+    position: relative;
+
+    &_indent {
+      box-sizing: border-box;
+      padding: 0 10px;
+    }
+  }
+
+  &__btn {
+    width: $reminderBtnSize;
+    height: $reminderBtnSize;
+    border: 1px solid black;
+    outline: none;
+    align-self: flex-start;
+    border-radius: 50%;
     box-sizing: border-box;
-    min-height: $reminderMinHeight;
-    transition: .2s ease;
-    &:hover{
-        background-color: #d3d3d3;
+    padding: 5px;
+
+    &:focus {
+      outline: none;
     }
 
-    &_indent{
-        padding: 6px 0;
+    &:hover {
+      background-image: url('../img/chek.svg');
+      background-size: cover;
     }
-    
-    &__datetime{
-        display: flex;
-        flex-direction: column;
-        padding-left: 0;
-        padding-right: 10px;
-    }
-        
-    &__date{
-        @include text;
-        width: 70px;
-        font-size: 14px;
-        @include media-breakpoint-down(xs){
-            font-size: 11px;
-            width: 50px;
-        }
-    }
+  }
 
-    &__time{
-        @include text;
-        @include media-breakpoint-down(xs){
-            font-size: 11px;
-            width: 50px;
-        }
+  &__name {
+    align-self: flex-start;
+    @include text;
+    padding: 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+    @include media-breakpoint-down(xs) {
+      font-size: 12px;
     }
+  }
 
-    &__notify{
-        display: flex;
-        flex-wrap: nowrap;
-        align-self: center;
-        width: 100%;
-        min-height: $notifyMinHeight;
-        border-left: 2px solid black;
-        position: relative;
-        &_indent{
-            box-sizing: border-box;
-            padding: 0 10px;
-        }
+  &__dateCreated {
+    position: absolute;
+    @include text;
+    top: 23px;
+    font-size: 14px;
+    @include media-breakpoint-down(xs) {
+      font-size: 11px;
     }
+    @include setAdaptiveDate {
+      font-size: 10px;
+    }
+  }
 
-    &__btn{
-        width: $reminderBtnSize;
-        height: $reminderBtnSize;
-        border: 1px solid black;
-        outline: none;
-        align-self: flex-start;
-        border-radius: 50%;
-        box-sizing: border-box;
-        padding: 5px;
-        &:focus{
-            outline: none;
-        }
-        &:hover{
-            background-image: url('../img/chek.svg');
-            background-size: cover;
-        }
+  &__destroy {
+    align-self: center;
+    position: absolute;
+    right: 10px;
+    outline: none;
+    background-color: #3d0063;
+    border: none;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 17px;
+    transition: .3s ease;
+
+    &:focus {
+      outline: none;
     }
 
-    &__name{
-        align-self: flex-start;
-        @include text;
-        padding: 0 10px;
-        font-size: 15px;
-        font-weight: 600;
-        @include media-breakpoint-down(xs){
-            font-size: 12px;
-        }
+    &:hover {
+      box-shadow: 0 0 9px 2px black;
     }
+  }
 
-    &__dateCreated{
-        position: absolute;
-        @include text;
-        top: 23px;
-        font-size: 14px;
-        @include media-breakpoint-down(xs){
-            font-size: 11px;
-        }
-        @include setAdaptiveDate{
-            font-size: 10px;
-        }
-    }
-
-    &__destroy{
-        align-self: center;
-        position: absolute;
-        right: 10px;
-        outline: none;
-        background-color: #3d0063;
-        border: none;
-        color: #fff;
-        border-radius: 3px;
-        font-size: 17px;
-        transition: .3s ease;
-        &:focus{
-            outline: none;
-        }
-        &:hover{
-            box-shadow: 0 0 9px 2px black;
-        }
-    }
-
-    &__edit{
-        background-image: url('../img/iconedit.svg');
-        background-size: cover;
-        box-sizing: border-box;
-        right: 50px;
-        align-self: center;
-        position: absolute;
-        border: none;
-        background-color: transparent;
-        width: 30px;
-        height: 29px;
-        transition: .2s ease;
-        &:focus{
-            outline: none;
-        }
-        &:hover{
-            transform: scale(1.05, 1.05);
-        }
-    }
-
-    &__countdown{
-        display: none;
-        position: absolute;
-        right: 100px;
-        top: 6px;
-        font-size: 20px;
-        color: black;
-        font-family: 'Montserrat', sans-serif;
-    }
-}
-
-.reminder.reminder-complete{
-    opacity: 0.6;
-}
-
-.reminder__name.reminder__name-complete{
-    text-decoration: line-through;
-}
-
-.reminder__btn.reminder__btn-complete{
-    background-image: url('../img/chek.svg');
+  &__edit {
+    background-image: url('../img/iconedit.svg');
     background-size: cover;
+    box-sizing: border-box;
+    right: 50px;
+    align-self: center;
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    width: 30px;
+    height: 29px;
+    transition: .2s ease;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      transform: scale(1.05, 1.05);
+    }
+  }
+
+  &__countdown {
+    display: none;
+    position: absolute;
+    right: 100px;
+    top: 6px;
+    font-size: 20px;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+  }
 }
+
+.reminder.reminder-complete {
+  opacity: 0.6;
+}
+
+.reminder__name.reminder__name-complete {
+  text-decoration: line-through;
+}
+
+.reminder__btn.reminder__btn-complete {
+  background-image: url('../img/chek.svg');
+  background-size: cover;
+}
+
 
